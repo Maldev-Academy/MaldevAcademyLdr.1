@@ -9,13 +9,13 @@ extern NT_API g_Nt; // Defined in main.c
 
 LPVOID MapDllFromKnownDllDir(IN PWSTR szDllName) {
 
-	PVOID				pModule			= NULL;
-	HANDLE				hSection		= INVALID_HANDLE_VALUE;
+	PVOID			pModule			= NULL;
+	HANDLE			hSection		= INVALID_HANDLE_VALUE;
 	UNICODE_STRING		UniString		= { 0 };
-	OBJECT_ATTRIBUTES	ObjectiveAttr	= { 0 };
-	SIZE_T				sViewSize		= NULL;
-	NTSTATUS			STATUS			= 0x00;
-	WCHAR				wFullDllPath [MAX_PATH] = { L'\\', L'K', L'n', L'o', L'w', L'n', L'D', L'l', L'l', L's', L'\\' };
+	OBJECT_ATTRIBUTES	ObjectiveAttr		= { 0 };
+	SIZE_T			sViewSize		= NULL;
+	NTSTATUS		STATUS			= 0x00;
+	WCHAR			wFullDllPath [MAX_PATH] = { L'\\', L'K', L'n', L'o', L'w', L'n', L'D', L'l', L'l', L's', L'\\' };
 
 	// Construct the dll's path in the knowndlls dir
 	Wcscat(wFullDllPath, szDllName);
@@ -56,7 +56,7 @@ VOID UnhookAllLoadedDlls()
 	NTSTATUS		STATUS		= 0x00;
 	PPEB			pPeb		= (PPEB)__readgsqword(0x60);
 	PLIST_ENTRY		pHeadEntry	= &pPeb->LoaderData->InMemoryOrderModuleList,
-					pNextEntry	= pHeadEntry->Flink;
+				pNextEntry	= pHeadEntry->Flink;
 
 	if (!g_Nt.bInit) {
 		return;
@@ -69,27 +69,27 @@ VOID UnhookAllLoadedDlls()
 	while (pNextEntry != pHeadEntry) {
 
 		// Getting the dll's name
-		PLDR_DATA_TABLE_ENTRY	pLdrDataTblEntry	= (PLDR_DATA_TABLE_ENTRY)((PBYTE)pNextEntry - offsetof(LDR_DATA_TABLE_ENTRY, InMemoryOrderLinks));
-		PUNICODE_STRING			pUnicodeDllName		= (PUNICODE_STRING)((PBYTE)&pLdrDataTblEntry->FullDllName + sizeof(UNICODE_STRING));
+		PLDR_DATA_TABLE_ENTRY	pLdrDataTblEntry		= (PLDR_DATA_TABLE_ENTRY)((PBYTE)pNextEntry - offsetof(LDR_DATA_TABLE_ENTRY, InMemoryOrderLinks));
+		PUNICODE_STRING		pUnicodeDllName			= (PUNICODE_STRING)((PBYTE)&pLdrDataTblEntry->FullDllName + sizeof(UNICODE_STRING));
 		// Getting the dll's local base address & load the unhooked version from \KnownDlls\ dir
-		LPVOID					pKnownDllCopy		= MapDllFromKnownDllDir(pUnicodeDllName->Buffer),
-								pLocalDllCopy		= (LPVOID)(pLdrDataTblEntry->DllBase);
+		LPVOID			pKnownDllCopy			= MapDllFromKnownDllDir(pUnicodeDllName->Buffer),
+					pLocalDllCopy			= (LPVOID)(pLdrDataTblEntry->DllBase);
 
-		SIZE_T					sTextSectionSize				= NULL;
-		LPVOID					pLocalTxtSectionAddress			= NULL,
-								pKnownDllTxtSectionAddress		= NULL;
-		DWORD					dwOldProtection					= 0x00;
+		SIZE_T			sTextSectionSize		= NULL;
+		LPVOID			pLocalTxtSectionAddress		= NULL,
+					pKnownDllTxtSectionAddress	= NULL;
+		DWORD			dwOldProtection			= 0x00;
 
 
 		// If both pointers are retrieved
 		if (pKnownDllCopy && pLocalDllCopy) {
 
 			// Fetch the nt headrs
-			PIMAGE_NT_HEADERS		pLocalImgNtHdrs				= (PIMAGE_NT_HEADERS)((ULONG_PTR)pLocalDllCopy + ((PIMAGE_DOS_HEADER)pLocalDllCopy)->e_lfanew);
+			PIMAGE_NT_HEADERS		pLocalImgNtHdrs		= (PIMAGE_NT_HEADERS)((ULONG_PTR)pLocalDllCopy + ((PIMAGE_DOS_HEADER)pLocalDllCopy)->e_lfanew);
 			if (pLocalImgNtHdrs->Signature != IMAGE_NT_SIGNATURE)
 				goto _CLEANUP;
 
-			PIMAGE_SECTION_HEADER	pLocalImgSecHdr				= IMAGE_FIRST_SECTION(pLocalImgNtHdrs);
+			PIMAGE_SECTION_HEADER	pLocalImgSecHdr			= IMAGE_FIRST_SECTION(pLocalImgNtHdrs);
 
 #ifdef DEBUG
 			PRINT("[i] Unhooking %ws ...", pUnicodeDllName->Buffer);
@@ -100,7 +100,7 @@ VOID UnhookAllLoadedDlls()
 			
 				if (DJB2HASH(pLocalImgSecHdr[i].Name) == text_DJB2) {
 
-					sTextSectionSize			= pLocalImgSecHdr[i].Misc.VirtualSize;
+					sTextSectionSize		= pLocalImgSecHdr[i].Misc.VirtualSize;
 					pLocalTxtSectionAddress		= (LPVOID)((ULONG_PTR)pLocalDllCopy + pLocalImgSecHdr[i].VirtualAddress);
 					pKnownDllTxtSectionAddress	= (LPVOID)((ULONG_PTR)pKnownDllCopy + pLocalImgSecHdr[i].VirtualAddress);
 					break;
