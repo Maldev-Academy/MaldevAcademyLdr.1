@@ -11,10 +11,10 @@
 
 
 // CONSTANTS
-#define PAYLOAD_EXEC_DELAY                  0x0A            // 10 Seconds delay before executing the payload
-#define	KEY_SIZE	                        0x20            // 32
-#define	IV_SIZE		                        0x10            // 16
-#define STATUS_OBJECT_NAME_NOT_FOUND        0xC0000034      // 'The object name is not found' - Returned by NtOpenSection in unhook.c if the dll is not found in \knowndlls\
+#define PAYLOAD_EXEC_DELAY                      0x0A            // 10 Seconds delay before executing the payload
+#define	KEY_SIZE                                0x20            // 32
+#define	IV_SIZE                                 0x10            // 16
+#define STATUS_OBJECT_NAME_NOT_FOUND            0xC0000034      // 'The object name is not found' - Returned by NtOpenSection in unhook.c if the dll is not found in \knowndlls\
 
 // HASHES
 #define NtOpenSection_DJB2                      0x17CFA34E
