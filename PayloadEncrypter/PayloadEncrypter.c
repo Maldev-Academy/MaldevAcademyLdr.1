@@ -9,8 +9,8 @@
 #define		IV_SIZE		0x10
 #define		NEW_NAME	"Payload.ctaes"
 
-#define ALLOC(SIZE)				LocalAlloc(LPTR, (SIZE_T)SIZE)
-#define FREE(BUFF)				LocalFree((LPVOID)BUFF)
+#define ALLOC(SIZE)			LocalAlloc(LPTR, (SIZE_T)SIZE)
+#define FREE(BUFF)			LocalFree((LPVOID)BUFF)
 #define REALLOC(BUFF, SIZE)		LocalReAlloc(BUFF, SIZE,  LMEM_MOVEABLE | LMEM_ZEROINIT)
 
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
@@ -115,10 +115,10 @@ BOOL AesEncryptPayload(IN PBYTE pRawPayloadBuffer, IN SIZE_T sRawPayloadSize, OU
 
 BOOL ReadPayloadFile(IN LPCSTR cFileName, OUT PBYTE* ppFileBuffer, OUT PDWORD pdwFileSize) {
 
-	HANDLE	hFile				= INVALID_HANDLE_VALUE;
+	HANDLE	hFile			= INVALID_HANDLE_VALUE;
 	PBYTE	pTmpReadBuffer		= NULL;
-	DWORD	dwFileSize			= NULL,
-			dwNumberOfBytesRead = NULL;
+	DWORD	dwFileSize		= NULL,
+		dwNumberOfBytesRead 	= NULL;
 
 	if (!pdwFileSize || !ppFileBuffer)
 		return FALSE;
@@ -161,7 +161,7 @@ _FUNC_CLEANUP:
 
 BOOL WritePayloadFile(IN PBYTE pFileBuffer, IN DWORD dwFileSize) {
 
-	HANDLE	hFile					= INVALID_HANDLE_VALUE;
+	HANDLE	hFile			= INVALID_HANDLE_VALUE;
 	DWORD	dwNumberOfBytesWritten	= 0x00;
 	
 	if (!pFileBuffer || !dwFileSize)
@@ -190,14 +190,14 @@ _FUNC_CLEANUP:
 
 int main(int argc, char* argv[]) {
 	
-	PBYTE	pPlainText				= NULL,
-			pCipherText				= NULL,
-			pCipherTextWithConfig	= NULL;
-	SIZE_T	sPlainTextSize			= NULL,
-			sCipherTextSize			= NULL;
+	PBYTE	pPlainText		= NULL,
+		pCipherText		= NULL,
+		pCipherTextWithConfig	= NULL;
+	SIZE_T	sPlainTextSize		= NULL,
+		sCipherTextSize		= NULL;
 
-	BYTE pAesKey	[KEY_SIZE]	= { 0 };
-	BYTE pAesIv		[IV_SIZE]	= { 0 };
+	BYTE 	pAesKey	[KEY_SIZE]	= { 0 };
+	BYTE 	pAesIv	[IV_SIZE]	= { 0 };
 
 
 	if (argc != 2) {
@@ -223,7 +223,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	memcpy((pCipherTextWithConfig + sCipherTextSize),					pAesKey,			KEY_SIZE);
+	memcpy((pCipherTextWithConfig + sCipherTextSize),			pAesKey,			KEY_SIZE);
 	memcpy((pCipherTextWithConfig + (sCipherTextSize + KEY_SIZE)),		pAesIv,				IV_SIZE);
 	
 	printf("[i] Final Payload Size: %d\n", (sCipherTextSize + KEY_SIZE + IV_SIZE));
