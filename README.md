@@ -1,8 +1,16 @@
 # MaldevAcademyLdr.1
 
+## Quick Links
+
+* Maldev Academy Home - https://maldevacademy.com
+  
+* Maldev Academy Syllabus - https://maldevacademy.com/syllabus
+
+* Maldev Academy Pricing - https://maldevacademy.com/pricing
+
 ## EXE Loader
 
-<a target="_blank" href="https://maldevacademy.com/">Maldev Academy</a>'s October update saw several interesting modules being released to our users. One of them was our DLL loader that was successfully tested against several EDRs including MDE and Crowdstrike.
+Maldev Academy's October update saw several interesting modules being released to our users. One of them was our DLL loader that was successfully tested against several EDRs including MDE and Crowdstrike.
 
 We promised to release an EXE version of the loader on GitHub.
 
@@ -28,4 +36,5 @@ We promised to release an EXE version of the loader on GitHub.
 
 ## Demo
 
+https://github.com/Maldev-Academy/MaldevAcademyLdr.1/assets/28691727/8963ad05-1b73-4c2d-9a0e-096fce7daa70
 
