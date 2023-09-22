@@ -14,7 +14,7 @@ Maldev Academy's October update saw several interesting modules being released t
 
 We promised to release an EXE version of the loader on GitHub.
 
-| ![tweet](https://github.com/Maldev-Academy/MaldevAcademyLdr.1/assets/28691727/ecda3186-cc33-452d-8ec5-f4f8e0a2c938) |
+| ![tweet](https://github.com/Maldev-Academy/MaldevAcademyLdr.1/blob/main/tweet.png) |
 |:--:| 
 | *https://twitter.com/MalDevAcademy/status/1701981413938012462* |
 
@@ -36,5 +36,5 @@ We promised to release an EXE version of the loader on GitHub.
 
 ## Demo
 
-https://github.com/Maldev-Academy/MaldevAcademyLdr.1/assets/28691727/8963ad05-1b73-4c2d-9a0e-096fce7daa70
+[![Demo](https://github.com/Maldev-Academy/MaldevAcademyLdr.1/blob/main/demo-cover.png)](https://github.com/Maldev-Academy/MaldevAcademyLdr.1/blob/main/demo.mp4)
 
