@@ -8,13 +8,13 @@
 
 FARPROC GetProcAddressH(IN HMODULE hModule, IN UINT32 uApiHash) {
 
-	PBYTE						pBase						= (PBYTE)hModule;
-	PIMAGE_NT_HEADERS			pImgNtHdrs					= NULL;
-	PIMAGE_EXPORT_DIRECTORY		pImgExportDir				= NULL;
-	PDWORD						pdwFunctionNameArray		= NULL;
-	PDWORD						pdwFunctionAddressArray		= NULL;
-	PWORD						pwFunctionOrdinalArray		= NULL;
-	DWORD						dwImgExportDirSize			= 0x00;
+	PBYTE				pBase				= (PBYTE)hModule;
+	PIMAGE_NT_HEADERS		pImgNtHdrs			= NULL;
+	PIMAGE_EXPORT_DIRECTORY		pImgExportDir			= NULL;
+	PDWORD				pdwFunctionNameArray		= NULL;
+	PDWORD				pdwFunctionAddressArray		= NULL;
+	PWORD				pwFunctionOrdinalArray		= NULL;
+	DWORD				dwImgExportDirSize		= 0x00;
 
 	if (!hModule || !uApiHash) {
 #ifdef DEBUG
@@ -27,8 +27,8 @@ FARPROC GetProcAddressH(IN HMODULE hModule, IN UINT32 uApiHash) {
 	if (pImgNtHdrs->Signature != IMAGE_NT_SIGNATURE)
 		return NULL;
 
-	pImgExportDir			= (PIMAGE_EXPORT_DIRECTORY)(pBase + pImgNtHdrs->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
-	dwImgExportDirSize		= pImgNtHdrs->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].Size;
+	pImgExportDir		= (PIMAGE_EXPORT_DIRECTORY)(pBase + pImgNtHdrs->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress);
+	dwImgExportDirSize	= pImgNtHdrs->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].Size;
 	pdwFunctionNameArray	= (PDWORD)(pBase + pImgExportDir->AddressOfNames);
 	pdwFunctionAddressArray = (PDWORD)(pBase + pImgExportDir->AddressOfFunctions);
 	pwFunctionOrdinalArray	= (PWORD) (pBase + pImgExportDir->AddressOfNameOrdinals);
@@ -46,9 +46,9 @@ FARPROC GetProcAddressH(IN HMODULE hModule, IN UINT32 uApiHash) {
 				(((ULONG_PTR)pFunctionAddress) < ((ULONG_PTR)pImgExportDir) + dwImgExportDirSize)
 				) {
 				CHAR	cForwarderName	[MAX_PATH]	= { 0 };
-				DWORD	dwDotOffset					= 0x00;
-				PCHAR	pcFunctionMod				= NULL;
-				PCHAR	pcFunctionName				= NULL;
+				DWORD	dwDotOffset			= 0x00;
+				PCHAR	pcFunctionMod			= NULL;
+				PCHAR	pcFunctionName			= NULL;
 
 				Memcpy(cForwarderName, pFunctionAddress, strlen((PCHAR)pFunctionAddress));
 
@@ -85,8 +85,8 @@ FARPROC GetProcAddressH(IN HMODULE hModule, IN UINT32 uApiHash) {
 HMODULE GetModuleHandleH(IN UINT32 uModuleHash) {
 
 
-	PPEB					pPeb = NULL;
-	PPEB_LDR_DATA			pLdr = NULL;
+	PPEB			pPeb = NULL;
+	PPEB_LDR_DATA		pLdr = NULL;
 	PLDR_DATA_TABLE_ENTRY	pDte = NULL;
 
 	pPeb = (PPEB)__readgsqword(0x60);
