@@ -84,7 +84,7 @@ typedef struct _PEB {
 	PVOID                   FastPebLockRoutine;
 	PVOID                   FastPebUnlockRoutine;
 	ULONG                   EnvironmentUpdateCount;
-	PVOID* KernelCallbackTable;
+	PVOID* 			KernelCallbackTable;
 	PVOID                   EventLogSection;
 	PVOID                   EventLog;
 	PVOID                   FreeList;
@@ -93,7 +93,7 @@ typedef struct _PEB {
 	ULONG                   TlsBitmapBits[0x2];
 	PVOID                   ReadOnlySharedMemoryBase;
 	PVOID                   ReadOnlySharedMemoryHeap;
-	PVOID* ReadOnlyStaticServerData;
+	PVOID* 			ReadOnlyStaticServerData;
 	PVOID                   AnsiCodePageData;
 	PVOID                   OemCodePageData;
 	PVOID                   UnicodeCaseTableData;
@@ -107,7 +107,7 @@ typedef struct _PEB {
 	ULONG                   HeapDeCommitFreeBlockThreshold;
 	ULONG                   NumberOfHeaps;
 	ULONG                   MaximumNumberOfHeaps;
-	PVOID** ProcessHeaps;
+	PVOID** 		ProcessHeaps;
 	PVOID                   GdiSharedHandleTable;
 	PVOID                   ProcessStarterHelper;
 	PVOID                   GdiDCAttributeList;
@@ -171,121 +171,121 @@ typedef struct _TEB {
 	PVOID				ActiveRpcHandle;
 	PVOID				ThreadLocalStoragePointer;
 	PPEB				ProcessEnvironmentBlock;
-	ULONG               LastErrorValue;
-	ULONG               CountOfOwnedCriticalSections;
+	ULONG               		LastErrorValue;
+	ULONG               		CountOfOwnedCriticalSections;
 	PVOID				CsrClientThread;
 	PVOID				Win32ThreadInfo;
-	ULONG               User32Reserved[26];
-	ULONG               UserReserved[5];
+	ULONG               		User32Reserved[26];
+	ULONG               		UserReserved[5];
 	PVOID				WOW32Reserved;
-	LCID                CurrentLocale;
-	ULONG               FpSoftwareStatusRegister;
+	LCID                		CurrentLocale;
+	ULONG               		FpSoftwareStatusRegister;
 	PVOID				SystemReserved1[54];
-	LONG                ExceptionCode;
+	LONG                		ExceptionCode;
 #if (NTDDI_VERSION >= NTDDI_LONGHORN)
-	PACTIVATION_CONTEXT_STACK* ActivationContextStackPointer;
-	UCHAR                  SpareBytes1[0x30 - 3 * sizeof(PVOID)];
-	ULONG                  TxFsContext;
+	PACTIVATION_CONTEXT_STACK* 	ActivationContextStackPointer;
+	UCHAR                  		SpareBytes1[0x30 - 3 * sizeof(PVOID)];
+	ULONG                  		TxFsContext;
 #elif (NTDDI_VERSION >= NTDDI_WS03)
-	PACTIVATION_CONTEXT_STACK ActivationContextStackPointer;
-	UCHAR                  SpareBytes1[0x34 - 3 * sizeof(PVOID)];
+	PACTIVATION_CONTEXT_STACK 	ActivationContextStackPointer;
+	UCHAR                  		SpareBytes1[0x34 - 3 * sizeof(PVOID)];
 #else
-	ACTIVATION_CONTEXT_STACK ActivationContextStack;
-	UCHAR                  SpareBytes1[24];
+	ACTIVATION_CONTEXT_STACK 	ActivationContextStack;
+	UCHAR                  		SpareBytes1[24];
 #endif
 	GDI_TEB_BATCH			GdiTebBatch;
-	CLIENT_ID				RealClientId;
-	PVOID					GdiCachedProcessHandle;
-	ULONG                   GdiClientPID;
-	ULONG                   GdiClientTID;
-	PVOID					GdiThreadLocalInfo;
-	PSIZE_T					Win32ClientInfo[62];
-	PVOID					glDispatchTable[233];
-	PSIZE_T					glReserved1[29];
-	PVOID					glReserved2;
-	PVOID					glSectionInfo;
-	PVOID					glSection;
-	PVOID					glTable;
-	PVOID					glCurrentRC;
-	PVOID					glContext;
-	NTSTATUS                LastStatusValue;
+	CLIENT_ID			RealClientId;
+	PVOID				GdiCachedProcessHandle;
+	ULONG                   	GdiClientPID;
+	ULONG                   	GdiClientTID;
+	PVOID				GdiThreadLocalInfo;
+	PSIZE_T				Win32ClientInfo[62];
+	PVOID				glDispatchTable[233];
+	PSIZE_T				glReserved1[29];
+	PVOID				glReserved2;
+	PVOID				glSectionInfo;
+	PVOID				glSection;
+	PVOID				glTable;
+	PVOID				glCurrentRC;
+	PVOID				glContext;
+	NTSTATUS                	LastStatusValue;
 	UNICODE_STRING			StaticUnicodeString;
-	WCHAR                   StaticUnicodeBuffer[261];
-	PVOID					DeallocationStack;
-	PVOID					TlsSlots[64];
-	LIST_ENTRY				TlsLinks;
-	PVOID					Vdm;
-	PVOID					ReservedForNtRpc;
-	PVOID					DbgSsReserved[2];
+	WCHAR                   	StaticUnicodeBuffer[261];
+	PVOID				DeallocationStack;
+	PVOID				TlsSlots[64];
+	LIST_ENTRY			TlsLinks;
+	PVOID				Vdm;
+	PVOID				ReservedForNtRpc;
+	PVOID				DbgSsReserved[2];
 #if (NTDDI_VERSION >= NTDDI_WS03)
-	ULONG                   HardErrorMode;
+	ULONG                   	HardErrorMode;
 #else
-	ULONG                  HardErrorsAreDisabled;
+	ULONG                  		HardErrorsAreDisabled;
 #endif
 #if (NTDDI_VERSION >= NTDDI_LONGHORN)
-	PVOID					Instrumentation[13 - sizeof(GUID) / sizeof(PVOID)];
-	GUID                    ActivityId;
-	PVOID					SubProcessTag;
-	PVOID					EtwLocalData;
-	PVOID					EtwTraceData;
+	PVOID				Instrumentation[13 - sizeof(GUID) / sizeof(PVOID)];
+	GUID                    	ActivityId;
+	PVOID				SubProcessTag;
+	PVOID				EtwLocalData;
+	PVOID				EtwTraceData;
 #elif (NTDDI_VERSION >= NTDDI_WS03)
-	PVOID					Instrumentation[14];
-	PVOID					SubProcessTag;
-	PVOID					EtwLocalData;
+	PVOID				Instrumentation[14];
+	PVOID				SubProcessTag;
+	PVOID				EtwLocalData;
 #else
-	PVOID					Instrumentation[16];
+	PVOID				Instrumentation[16];
 #endif
-	PVOID					WinSockData;
-	ULONG					GdiBatchCount;
+	PVOID				WinSockData;
+	ULONG				GdiBatchCount;
 #if (NTDDI_VERSION >= NTDDI_LONGHORN)
-	BOOLEAN                SpareBool0;
-	BOOLEAN                SpareBool1;
-	BOOLEAN                SpareBool2;
+	BOOLEAN                		SpareBool0;
+	BOOLEAN                		SpareBool1;
+	BOOLEAN                		SpareBool2;
 #else
-	BOOLEAN                InDbgPrint;
-	BOOLEAN                FreeStackOnTermination;
-	BOOLEAN                HasFiberData;
+	BOOLEAN                		InDbgPrint;
+	BOOLEAN                		FreeStackOnTermination;
+	BOOLEAN                		HasFiberData;
 #endif
-	UCHAR                  IdealProcessor;
+	UCHAR                 	 	IdealProcessor;
 #if (NTDDI_VERSION >= NTDDI_WS03)
-	ULONG                  GuaranteedStackBytes;
+	ULONG                  		GuaranteedStackBytes;
 #else
-	ULONG                  Spare3;
+	ULONG                  		Spare3;
 #endif
-	PVOID				   ReservedForPerf;
-	PVOID				   ReservedForOle;
-	ULONG                  WaitingOnLoaderLock;
+	PVOID				ReservedForPerf;
+	PVOID				ReservedForOle;
+	ULONG                  		WaitingOnLoaderLock;
 #if (NTDDI_VERSION >= NTDDI_LONGHORN)
-	PVOID				   SavedPriorityState;
-	ULONG_PTR			   SoftPatchPtr1;
-	ULONG_PTR			   ThreadPoolData;
+	PVOID				SavedPriorityState;
+	ULONG_PTR			SoftPatchPtr1;
+	ULONG_PTR			ThreadPoolData;
 #elif (NTDDI_VERSION >= NTDDI_WS03)
-	ULONG_PTR			   SparePointer1;
-	ULONG_PTR              SoftPatchPtr1;
-	ULONG_PTR              SoftPatchPtr2;
+	ULONG_PTR			SparePointer1;
+	ULONG_PTR              		SoftPatchPtr1;
+	ULONG_PTR              		SoftPatchPtr2;
 #else
-	Wx86ThreadState        Wx86Thread;
+	Wx86ThreadState        		Wx86Thread;
 #endif
-	PVOID* TlsExpansionSlots;
+	PVOID*	 			TlsExpansionSlots;
 #if defined(_WIN64) && !defined(EXPLICIT_32BIT)
-	PVOID                  DeallocationBStore;
-	PVOID                  BStoreLimit;
+	PVOID                  		DeallocationBStore;
+	PVOID                  		BStoreLimit;
 #endif
-	ULONG                  ImpersonationLocale;
-	ULONG                  IsImpersonating;
-	PVOID                  NlsCache;
-	PVOID                  pShimData;
-	ULONG                  HeapVirtualAffinity;
-	HANDLE                 CurrentTransactionHandle;
-	PTEB_ACTIVE_FRAME      ActiveFrame;
+	ULONG                  		ImpersonationLocale;
+	ULONG                  		IsImpersonating;
+	PVOID                  		NlsCache;
+	PVOID                  		pShimData;
+	ULONG                  		HeapVirtualAffinity;
+	HANDLE                 		CurrentTransactionHandle;
+	PTEB_ACTIVE_FRAME      		ActiveFrame;
 #if (NTDDI_VERSION >= NTDDI_WS03)
-	PVOID FlsData;
+	PVOID 				FlsData;
 #endif
 #if (NTDDI_VERSION >= NTDDI_LONGHORN)
-	PVOID PreferredLangauges;
-	PVOID UserPrefLanguages;
-	PVOID MergedPrefLanguages;
-	ULONG MuiImpersonation;
+	PVOID 				PreferredLangauges;
+	PVOID 				UserPrefLanguages;
+	PVOID 				MergedPrefLanguages;
+	ULONG 				MuiImpersonation;
 	union
 	{
 		struct
@@ -309,17 +309,17 @@ typedef struct _TEB {
 		};
 		USHORT SameTebFlags;
 	};
-	PVOID TxnScopeEntercallback;
-	PVOID TxnScopeExitCAllback;
-	PVOID TxnScopeContext;
-	ULONG LockCount;
-	ULONG ProcessRundown;
-	ULONG64 LastSwitchTime;
-	ULONG64 TotalSwitchOutTime;
-	LARGE_INTEGER WaitReasonBitMap;
+	PVOID 				TxnScopeEntercallback;
+	PVOID 				TxnScopeExitCAllback;
+	PVOID 				TxnScopeContext;
+	ULONG 				LockCount;
+	ULONG  				ProcessRundown;
+	ULONG64  			LastSwitchTime;
+	ULONG64 			TotalSwitchOutTime;
+	LARGE_INTEGER 			WaitReasonBitMap;
 #else
-	BOOLEAN SafeThunkCall;
-	BOOLEAN BooleanSpare[3];
+	BOOLEAN 			SafeThunkCall;
+	BOOLEAN 			BooleanSpare[3];
 #endif
 } TEB, * PTEB;
 
@@ -589,7 +589,7 @@ typedef enum _PS_ATTRIBUTE_NUM
 } PS_ATTRIBUTE_NUM;
 
 
-#define PsAttributeValue(Number, Thread, Input, Additive)		\
+#define PsAttributeValue(Number, Thread, Input, Additive)				\
     (((Number) & PS_ATTRIBUTE_NUMBER_MASK)	|					\
     ((Thread) ? PS_ATTRIBUTE_THREAD : 0)	|					\
     ((Input) ? PS_ATTRIBUTE_INPUT : 0)		|					\
@@ -599,7 +599,7 @@ typedef enum _PS_ATTRIBUTE_NUM
     PsAttributeValue(PsAttributeParentProcess, FALSE, TRUE, TRUE)		
 #define PS_ATTRIBUTE_DEBUG_PORT										\
     PsAttributeValue(PsAttributeDebugPort, FALSE, TRUE, TRUE)			
-#define PS_ATTRIBUTE_TOKEN											\
+#define PS_ATTRIBUTE_TOKEN										\
     PsAttributeValue(PsAttributeToken, FALSE, TRUE, TRUE)				
 #define PS_ATTRIBUTE_CLIENT_ID										\
     PsAttributeValue(PsAttributeClientId, TRUE, FALSE, FALSE)			
@@ -615,7 +615,7 @@ typedef enum _PS_ATTRIBUTE_NUM
     PsAttributeValue(PsAttributePriorityClass, FALSE, TRUE, FALSE)		
 #define PS_ATTRIBUTE_ERROR_MODE										\
     PsAttributeValue(PsAttributeErrorMode, FALSE, TRUE, FALSE)			
-#define PS_ATTRIBUTE_STD_HANDLE_INFO								\
+#define PS_ATTRIBUTE_STD_HANDLE_INFO									\
     PsAttributeValue(PsAttributeStdHandleInfo, FALSE, TRUE, FALSE)		
 #define PS_ATTRIBUTE_HANDLE_LIST									\
     PsAttributeValue(PsAttributeHandleList, FALSE, TRUE, FALSE)			
@@ -623,11 +623,11 @@ typedef enum _PS_ATTRIBUTE_NUM
     PsAttributeValue(PsAttributeGroupAffinity, TRUE, TRUE, FALSE)		
 #define PS_ATTRIBUTE_PREFERRED_NODE									\
     PsAttributeValue(PsAttributePreferredNode, FALSE, TRUE, FALSE)		
-#define PS_ATTRIBUTE_IDEAL_PROCESSOR								\
+#define PS_ATTRIBUTE_IDEAL_PROCESSOR									\
     PsAttributeValue(PsAttributeIdealProcessor, TRUE, TRUE, FALSE)		
-#define PS_ATTRIBUTE_MITIGATION_OPTIONS								\
+#define PS_ATTRIBUTE_MITIGATION_OPTIONS									\
     PsAttributeValue(PsAttributeMitigationOptions, FALSE, TRUE, FALSE)
-#define PS_ATTRIBUTE_PROTECTION_LEVEL								\
+#define PS_ATTRIBUTE_PROTECTION_LEVEL									\
     PsAttributeValue(PsAttributeProtectionLevel, FALSE, TRUE, FALSE)	
 #define PS_ATTRIBUTE_UMS_THREAD										\
     PsAttributeValue(PsAttributeUmsThread, TRUE, TRUE, FALSE)
@@ -635,34 +635,34 @@ typedef enum _PS_ATTRIBUTE_NUM
     PsAttributeValue(PsAttributeSecureProcess, FALSE, TRUE, FALSE)
 #define PS_ATTRIBUTE_JOB_LIST										\
     PsAttributeValue(PsAttributeJobList, FALSE, TRUE, FALSE)
-#define PS_ATTRIBUTE_CHILD_PROCESS_POLICY							\
+#define PS_ATTRIBUTE_CHILD_PROCESS_POLICY								\
     PsAttributeValue(PsAttributeChildProcessPolicy, FALSE, TRUE, FALSE)
-#define PS_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY				\
+#define PS_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY							\
     PsAttributeValue(PsAttributeAllApplicationPackagesPolicy, FALSE, TRUE, FALSE)
 #define PS_ATTRIBUTE_WIN32K_FILTER									\
     PsAttributeValue(PsAttributeWin32kFilter, FALSE, TRUE, FALSE)
-#define PS_ATTRIBUTE_SAFE_OPEN_PROMPT_ORIGIN_CLAIM					\
+#define PS_ATTRIBUTE_SAFE_OPEN_PROMPT_ORIGIN_CLAIM							\
     PsAttributeValue(PsAttributeSafeOpenPromptOriginClaim, FALSE, TRUE, FALSE)
 #define PS_ATTRIBUTE_BNO_ISOLATION									\
     PsAttributeValue(PsAttributeBnoIsolation, FALSE, TRUE, FALSE)
-#define PS_ATTRIBUTE_DESKTOP_APP_POLICY								\
+#define PS_ATTRIBUTE_DESKTOP_APP_POLICY									\
     PsAttributeValue(PsAttributeDesktopAppPolicy, FALSE, TRUE, FALSE)
 
 
 
 
 #define RTL_USER_PROC_PARAMS_NORMALIZED			0x00000001
-#define RTL_USER_PROC_PROFILE_USER				0x00000002
+#define RTL_USER_PROC_PROFILE_USER			0x00000002
 #define RTL_USER_PROC_PROFILE_KERNEL			0x00000004
 #define RTL_USER_PROC_PROFILE_SERVER			0x00000008
-#define RTL_USER_PROC_RESERVE_1MB				0x00000020
-#define RTL_USER_PROC_RESERVE_16MB				0x00000040
+#define RTL_USER_PROC_RESERVE_1MB			0x00000020
+#define RTL_USER_PROC_RESERVE_16MB			0x00000040
 #define RTL_USER_PROC_CASE_SENSITIVE			0x00000080
 #define RTL_USER_PROC_DISABLE_HEAP_DECOMMIT		0x00000100
 #define RTL_USER_PROC_DLL_REDIRECTION_LOCAL		0x00001000
 #define RTL_USER_PROC_APP_MANIFEST_PRESENT		0x00002000
 #define RTL_USER_PROC_IMAGE_KEY_MISSING			0x00004000
-#define RTL_USER_PROC_OPTIN_PROCESS				0x00020000
+#define RTL_USER_PROC_OPTIN_PROCESS			0x00020000
 
 
 
