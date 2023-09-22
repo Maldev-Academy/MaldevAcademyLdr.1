@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{78e64dd2-170a-437a-8141-d37ab6668044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HellsHall">
+      <UniqueIdentifier>{a2d7ea06-3c85-4397-98d4-01a7f0b83720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{2b1879da-f142-46c8-93a2-e5457fef626c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CtAes">
+      <UniqueIdentifier>{089fea95-f1b7-42db-be44-067ae9d434ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous">
+      <UniqueIdentifier>{d7e0589e-e51a-472d-95eb-ba9799f0b689}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HellsHall.c">
+      <Filter>HellsHall</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.c">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Unook.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Inject.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CtAes.c">
+      <Filter>CtAes</Filter>
+    </ClCompile>
+    <ClCompile Include="ApiHashing.c">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="RsrcPayload.c">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.c">
+      <Filter>Debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Structs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CtAes.h">
+      <Filter>CtAes</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionPntrs.h">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="IatCamo.h">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="HellsAsm.asm">
+      <Filter>HellsHall</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
